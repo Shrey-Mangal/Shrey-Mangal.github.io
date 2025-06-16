@@ -1,152 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RTU GradeSheet Download</title>
-  <style>
-    body {
-  background: #f3f6fc;
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-.container {
-  width: 360px;
-  background: white;
-  margin: 60px auto;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.logo {
-  width: 80px;
-  margin-bottom: 15px;
-}
-
-h2 {
-  color: #003366;
-  margin-bottom: 25px;
-}
-
-label {
-  display: block;
-  text-align: left;
-  margin: 15px 0 5px;
-  font-weight: bold;
-  color: #222;
-}
-
-input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #aaa;
-  border-radius: 4px;
-  font-size: 15px;
-}
-
-.captcha-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 8px;
-}
-
-#captchaBox {
-  flex: 1;
-  background-color: #ddd;
-  padding: 10px;
-  font-weight: bold;
-  font-size: 18px;
-  text-align: center;
-  border-radius: 4px;
-  margin-right: 10px;
-}
-
-#refreshCaptcha {
-  background: #0078d7;
-  color: white;
-  border: none;
-  padding: 10px;
-  font-size: 18px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.submit-btn {
-  margin-top: 25px;
-  background-color: #0078d7;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  width: 100%;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.submit-btn:hover {
-  background-color: #005fa3;
-}
-
-footer {
-  margin-top: 20px;
-  font-size: 13px;
-  color: #666;
-}
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Gradesheet</title>
+    <style>
+        body {
+            background: #e6f0fa;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 32px 24px 24px 24px;
+        }
+        .logo {
+            display: block;
+            margin: 0 auto 16px auto;
+            width: 180px;
+        }
+        h2 {
+            text-align: center;
+            color: #0a3d62;
+            margin-bottom: 24px;
+        }
+        form label {
+            display: block;
+            margin-top: 16px;
+            color: #333;
+        }
+        form select, form input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            border: 1px solid #b0c4de;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        .note {
+            font-size: 0.95em;
+            color: #555;
+            margin-top: 12px;
+        }
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+        }
+        .actions button {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .download-btn {
+            background: #0a3d62;
+            color: #fff;
+        }
+        .reset-btn {
+            background: #b0c4de;
+            color: #222;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <img src="images/rtu-logo.png" alt="RTU Logo" class="logo" />
-    <h2>Download Grade Sheet</h2>
-    <form id="resultForm">
-      <label for="roll">Roll Number</label>
-      <input type="text" id="roll" name="roll" placeholder="Enter Roll Number" required />
+    <div class="container">
+        <img src="https://rtu.sumsraj.com/App_Themes/skyblue/images/logo-white.png" alt="RTU Logo" class="logo">
+        <h2>Download Result</h2>
+        <form id="gradesheetForm">
+            <label for="session">Session</label>
+            <select id="session" required>
+                <option value="">-- Select Session --</option>
+                <option>2024-25</option>
+                <option>2023-24</option>
+                <option>2022-23</option>
+            </select>
 
-      <label for="mother">Mother's Name</label>
-      <input type="text" id="mother" name="mother" placeholder="Enter Mother's Name" required />
+            <label for="examCategory">Exam Category</label>
+            <select id="examCategory" required>
+                <option value="">-- Select Exam Category --</option>
+                <option>Main</option>
+                <option>Back</option>
+            </select>
 
-      <label>Captcha</label>
-      <div class="captcha-section">
-        <div id="captchaBox">AB12X</div>
-        <button type="button" id="refreshCaptcha">↻</button>
-      </div>
+            <label for="degree">Degree</label>
+            <input type="text" id="degree" placeholder="e.g. B.Tech" required>
 
-      <input type="text" id="captchaInput" placeholder="Enter Captcha" required />
+            <label for="semester">Semester</label>
+            <select id="semester" required>
+                <option value="">-- Select Semester --</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+            </select>
 
-      <button type="submit" class="submit-btn">View Result</button>
-    </form>
-    <footer>© RTU Portal Clone | Demo Version</footer>
-  </div>
+            <label for="rollno">Roll No.</label>
+            <input type="text" id="rollno" required>
 
-  <script>
-    function generateCaptcha() {
-  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-  let captcha = "";
-  for (let i = 0; i < 5; i++) {
-    captcha += chars[Math.floor(Math.random() * chars.length)];
-  }
-  return captcha;
-}
+            <label for="father">Father's Name</label>
+            <input type="text" id="father">
 
-function setCaptcha() {
-  document.getElementById("captchaBox").textContent = generateCaptcha();
-}
+            <label for="mother">Mother's Name</label>
+            <input type="text" id="mother">
 
-document.getElementById("refreshCaptcha").addEventListener("click", setCaptcha);
-
-document.getElementById("resultForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-  alert("This is a demo page. Result functionality is not connected.");
+            <div class="note">
+                Note: Please enter at least the first 4 characters of your mother's or father's name.<br>
+                Note: In case of 1. "UM" - Result will be declared after University decision published.<br>
+                Note: In case of 2. "RW" - Result will be declared after deficiency is cleared. (College needs to contact University regarding this).
+            </div>
+            <div class="actions">
+                <button type="submit" class="download-btn">Download</button>
+                <button type="reset" class="reset-btn">Reset</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById('gradesheetForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    window.open('24EDCAD122.pdf', '_blank');
 });
-
-setCaptcha(); // Initial load
-
-  </script>
+    </script>
 </body>
 </html>
